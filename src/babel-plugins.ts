@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 import type { EmberData412Options, EmberDataMacrosConfig } from './types.js';
 import { defaultMacrosConfig } from './default-config.js';
 import { ALL_PACKAGE_NAMES } from './utils/package-entries.js';
@@ -22,9 +23,9 @@ import { ALL_PACKAGE_NAMES } from './utils/package-entries.js';
  * ```
  */
 export function emberDataBabelPlugins(options?: EmberData412Options): unknown[] {
-  // Lazy-require to avoid issues when @embroider/macros isn't installed
-  // (e.g., when only using the config primitives)
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  // Use createRequire because @embroider/macros/babel is CJS-only
+  // and ESM bundles can't use bare `require()`
+  const require = createRequire(import.meta.url);
   const { buildMacros } = require('@embroider/macros/babel') as {
     buildMacros: (opts: {
       setConfig?: Record<string, unknown>;

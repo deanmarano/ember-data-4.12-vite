@@ -1,6 +1,6 @@
 {
   "name": "ember-data-4.12-vite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vite integration for ember-data 4.12 — provides macros config and module resolution that addon-main.js would normally handle",
   "type": "module",
   "main": "./dist/index.cjs",
